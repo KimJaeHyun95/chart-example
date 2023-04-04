@@ -1,12 +1,18 @@
 <template>
   <div>
     <h1>두 번째 페이지 입니다.</h1>
-    <wordcloud></wordcloud>
+    <word-Cloud></word-Cloud>
+    <waffle-chart></waffle-chart>
+    <waffle-chart-horizontality></waffle-chart-horizontality>
+    <network-chart></network-chart>
   </div>
 </template>
 
 <script>
-import Wordcloud from "@/wordcloud/Wordcloud";
+import WordCloud from "@/wordCloud/WordCloud";
+import WaffleChart from "@/chart/WaffleChart";
+import WaffleChartHorizontality from "@/chart/WaffleChartHorizontality";
+import NetworkChart from "@/chart/NetworkChart";
 
 export default {
   name: 'SecondView',
@@ -17,7 +23,10 @@ export default {
   mounted() {
   },
   components: {
-    Wordcloud
+    WordCloud,
+    WaffleChart,
+    WaffleChartHorizontality,
+    NetworkChart
   },
   methods: {
   },

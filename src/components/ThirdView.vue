@@ -11,12 +11,18 @@
 
     <seoul-map :size="1"></seoul-map>
 
+    <korea-detail-map :size="2"></korea-detail-map>
+
+    <korea-map :size="2"></korea-map>
+
   </div>
 </template>
 
 <script>
 import OpenStreetMap from "@/map/OpenStreetMap";
 import SeoulMap from "@/map/SeoulMap";
+import KoreaDetailMap from "@/map/KoreaDetailMap";
+import KoreaMap from "@/map/KoreaMap";
 
 export default {
   name: 'ThirdView',
@@ -28,7 +34,9 @@ export default {
   },
   components: {
     OpenStreetMap,
-    SeoulMap
+    SeoulMap,
+    KoreaDetailMap,
+    KoreaMap
   },
   methods: {
   },

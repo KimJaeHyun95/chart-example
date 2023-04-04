@@ -4,12 +4,14 @@ import { createRouter, createWebHistory } from 'vue-router'
 import FirstView from '../components/FirstView'
 import SecondView from '../components/SecondView'
 import ThirdView from '../components/ThirdView'
+import FourthView from '../components/FourthView'
 
 // 라우터 설계
 const routes = [
   { path: '/1', component:FirstView},
   { path: '/2', component:SecondView},
   { path: '/3', component:ThirdView},
+  { path: '/4', component:FourthView},
 ]
 
 // 라우터 생성

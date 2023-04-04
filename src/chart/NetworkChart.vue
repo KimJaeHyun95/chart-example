@@ -7,42 +7,47 @@ import * as d3 from "d3";
 
 export default {
   name: "NetworkChart",
+  props: {
+    // Props:
+    // - size: Number (optional) - 네트워크 차트의 크기를 조절하는 배율입니다. 기본값은 1입니다.
+    // - circleSize: Number (optional) - 원의 크기를 조절하는 배율입니다. 기본값은 1입니다.
+    // - circleDistance: Number (optional) - 노드 간 거리를 조절하는 배율입니다. 기본값은 1입니다.
+    // - nodes: Array (required) - 네트워크 차트의 노드들을 나타내는 배열입니다. 각 노드는 { id: '식별자', depth: '깊이' } 형식이어야 합니다.
+    // - links: Array (optional) - 네트워크 차트의 링크들을 나타내는 배열입니다. 각 링크는 { source: '출발 노드', target: '도착 노드' } 형식이어야 합니다.
+    size: {
+      type: Number,
+      default: 1
+    },
+    circleSize: {
+      type: Number,
+      default: 1
+    },
+    circleDistance: {
+      type: Number,
+      default: 1
+    },
+    nodes: {
+      type: Array,
+      require: true
+    },
+    links: {
+      type: Array,
+      default: () => [],
+    }
+  },
   mounted() {
     this.createNetworkChart();
   },
   methods: {
     createNetworkChart() {
       // 데이터 정의
-      const nodes = [
-        { id: "코로나", depth: 0 },
-        { id: "의료", depth: 1 },
-        { id: "경제", depth: 1 },
-        { id: "정부", depth: 1 },
-        { id: "병원", depth: 2 },
-        { id: "마스크", depth: 2 },
-        { id: "백신", depth: 2 },
-        { id: "자영업자", depth: 2 },
-        { id: "금리", depth: 2 },
-        { id: "보건복지본부", depth: 2 },
-        { id: "정책", depth: 2 },
-      ];
+      const nodes = this.nodes;
 
-      const links = [
-        { source: "코로나", target: "의료" },
-        { source: "코로나", target: "경제" },
-        { source: "코로나", target: "정부" },
-        { source: "의료", target: "병원" },
-        { source: "의료", target: "마스크" },
-        { source: "의료", target: "백신" },
-        { source: "경제", target: "자영업자" },
-        { source: "경제", target: "금리" },
-        { source: "정부", target: "보건복지본부" },
-        { source: "정부", target: "정책" },
-      ];
+      const links = this.links;
 
       // 그래프 크기 설정
-      const width = 800;
-      const height = 600;
+      const width = 400 * this.size;
+      const height = 300 * this.size;
 
       // 색상 스케일
       const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
@@ -50,8 +55,8 @@ export default {
       // Force simulation 설정
       const simulation = d3
           .forceSimulation(nodes) // 노드들에 대한 시뮬레이션을 생성합니다.
-          .force("link", d3.forceLink(links).id((d) => d.id).distance(100)) // 링크에 대한 힘을 정의하고, 노드간 거리를 설정합니다.
-          .force("charge", d3.forceManyBody().strength(-1000)) // 노드간의 충돌을 처리하기 위한 힘을 정의합니다.
+          .force("link", d3.forceLink(links).id((d) => d.id).distance(35 * this.circleDistance)) // 링크에 대한 힘을 정의하고, 노드간 거리를 설정합니다.
+          .force("charge", d3.forceManyBody().strength(- 500 * this.circleDistance)) // 노드간의 충돌을 처리하기 위한 힘을 정의합니다.
           .force("center", d3.forceCenter(width / 2, height / 2)) // 중심을 차트의 중간 지점으로 설정합니다.
           .force("x", d3.forceX(width / 2).strength(0.1)) // X축 방향의 힘을 설정하고 강도를 조절합니다.
           .force("y", d3.forceY(height / 2).strength(0.1)) // Y축 방향의 힘을 설정하고 강도를 조절합니다.
@@ -77,7 +82,7 @@ export default {
           .append("line") // 선 요소를 추가합니다.
           .attr("stroke", "#999") // 선의 색상을 설정합니다.
           .attr("stroke-opacity", 0.7) // 선의 투명도를 설정합니다.
-          .attr("stroke-width", 4); // 선의 두께를 설정합니다.
+          .attr("stroke-width", 4 * this.circleSize); // 선의 두께를 설정합니다.
 
       // 노드 생성
       const node = svg
@@ -85,7 +90,7 @@ export default {
           .data(nodes) // 노드 데이터를 바인딩합니다.
           .enter() // 데이터를 기반으로 요소를 생성하도록 설정합니다.
           .append("circle") // 원 요소를 추가합니다.
-          .attr("r", (d) => (d.depth === 0 ? 50 : 35 - d.depth * 10)) // 원의 반지름을 노드의 depth에 따라 설정합니다.
+          .attr("r", (d) => (d.depth === 0 ? 30 : 20 - d.depth * 5) * this.circleSize) // 원의 반지름을 노드의 depth에 따라 설정합니다.
           .attr("fill", (d) => colorScale(d.depth)); // 원의 색상을 노드의 depth에 따라 설정합니다.
 
       // 노드 레이블 생성
@@ -95,9 +100,9 @@ export default {
           .enter() // 데이터를 기반으로 요소를 생성하도록 설정합니다.
           .append("text") // 텍스트 요소를 추가합니다.
           .text((d) => d.id) // 텍스트 내용을 노드의 id로 설정합니다.
-          .attr("font-size", "12px") // 텍스트의 글꼴 크기를 설정합니다.
+          .attr("font-size", 10 * this.circleSize +"px") // 텍스트의 글꼴 크기를 설정합니다.
           .attr("text-anchor", "middle") // 텍스트의 정렬 방향을 중앙으로 설정합니다.
-          .attr("dy", (d) => (d.depth === 0 ? 30 : 20 - d.depth * 3)); // 텍스트의 y축 상의 위치를 조절합니다.
+          .attr("dy",10 * this.circleSize / 2); // 텍스트의 y축 상의 위치를 조절합니다.
 
       // 시뮬레이션 tick 이벤트 리스너
       simulation.on("tick", () => {
@@ -111,7 +116,7 @@ export default {
 
         label
             .attr("x", (d) => d.x)
-            .attr("y", (d) => d.y - (d.depth === 0 ? 25 : 15 - d.depth * 3));
+            .attr("y", (d) => d.y);
       });
     },
 

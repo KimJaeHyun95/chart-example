@@ -1,54 +1,59 @@
 <template>
-  <div className="wordcloud-container">
-    <canvas ref="wordCloudCanvas" style="max-width: 800px; max-height: 400px"></canvas>
+  <div class="wordcloud-container">
+    <canvas ref="wordCloudCanvas" :width="canvasSize.width" :height="canvasSize.height"></canvas>
   </div>
 </template>
-
 <script>
-  import WordCloud from 'wordcloud';
+import WordCloud from 'wordcloud';
 
-  export default {
+export default {
   name: 'WordCloud',
+  // Props:
+  // - size: Number (optional) - 워드 클라우드의 크기를 조절하는 배율입니다. 기본값은 1입니다.
+  // - wordList: Array (optional) - 워드 클라우드에 표시할 단어와 가중치를 포함하는 배열입니다. 각 단어는 ['단어', 가중치] 형식이어야 합니다.
+  props: {
+    size: Number,
+    wordList: {
+      type: Array,
+      require: true
+    },
+  },
+  computed: {
+    canvasSize() {
+      const size = this.size || 1;
+      return {
+        width: 400 * size,
+        height: 300 * size
+      };
+    }
+  },
   data() {
-  return {
-  wordCloudInstance: null,
-};
-},
+    return {wordCloudInstance: null};
+  },
   mounted() {
-  this.createWordCloud();
-},
+    this.createWordCloud();
+  },
   methods: {
-  createWordCloud() {
-  const canvas = this.$refs.wordCloudCanvas;
-  const wordList = [
-    ['Hello', 50],
-    ['World', 30],
-    ['Example', 20],
-    ['Data', 15],
-    ['Vue.js', 10],
-    ['WordCloud', 5],
-  ];
-
-  WordCloud(canvas, {
-  list: wordList,
-  gridSize: 5,
-  weightFactor: 2,
-  fontFamily: 'Roboto, sans-serif',
-  color: 'random-dark',
-  backgroundColor: '#FFFFFF',
-  rotateRatio: 0.5,
-  rotationSteps: 2,
-  shuffle: true,
-});
-},
-},
+    createWordCloud() {
+      const canvas = this.$refs.wordCloudCanvas;
+      const size = this.size || 1;
+      WordCloud(canvas, {
+        list: this.wordList,
+        gridSize: 3 * size,
+        weightFactor: 4 * size,
+        fontFamily: 'Roboto, sans-serif',
+        color: 'random-dark',
+        backgroundColor: '#FFFFFF',
+        rotateRatio: 0.5,
+        rotationSteps: 2,
+        shuffle: true
+      });
+    }
+  }
 };
 </script>
-
 <style>
-  .wordcloud-container {
+.wordcloud-container {
   position: relative;
-  max-width: 800px;
-  max-height: 400px;
 }
 </style>

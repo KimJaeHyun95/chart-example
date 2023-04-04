@@ -9,15 +9,18 @@ import { geoPath } from "d3-geo";
 
 export default {
   name: "SeoulMap",
+  props: {
+    size: Number
+  },
   mounted() {
     this.drawSeoulMap();
   },
   methods: {
     async drawSeoulMap() {
-      const size = 0.5;
-      const width = 800 * size;
-      const height = 600 * size;
-      const scale = 100000 * size;
+      const size = this.size || 1;
+      const width = 400 * size;
+      const height = 300 * size;
+      const scale = 50000 * size;
 
       const svg = d3
           .select(this.$refs.seoulMap)

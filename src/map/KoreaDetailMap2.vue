@@ -1,21 +1,19 @@
 <template>
-  <div ref="koreaMap"></div>
+  <div ref="koreaMap" style=""></div>
 </template>
 <script>
 import * as d3 from "d3";
 import { geoMercator } from "d3-geo";
 import { geoPath } from "d3-geo";
+import { zoom } from "d3-zoom";
 
 export default {
-  name: "KoreaDetailMap",
+  name: "KoreaDetailMap2",
   props: {
     size: Number
   },
   data() {
-    return {
-      seoulCodeList: [  "11010", "11020", "11030", "11040", "11050",  "11060", "11070", "11080", "11090", "11100",  "11110", "11120", "11130", "11140", "11150",  "11160", "11170", "11180", "11190", "11200",  "11210", "11220", "11230", "11240", "11250"]
-
-    };
+    return {};
   },
   mounted() {
     this.drawKoreaMap();
@@ -33,6 +31,8 @@ export default {
           .attr("width", width)
           .attr("height", height);
 
+      const g = svg.append("g");
+
       const projection = geoMercator()
           .center([128, 36]) // 대한민국 중심 좌표
           .scale(scale)
@@ -40,22 +40,25 @@ export default {
 
       const path = geoPath().projection(projection);
 
+      // 확대, 축소, 드래그 기능 추가
+      const zoomHandler = zoom()
+          .scaleExtent([1, 8]) // 확대, 축소 범위 설정
+          .on("zoom", (event) => {
+            g.attr("transform", event.transform);
+          });
+
+      svg.call(zoomHandler);
+
       // 대한민국 행정구역 TopoJSON 데이터 불러오기
       // GeoJSON 데이터를 불러옵니다.
       d3.json("https://raw.githubusercontent.com/southkorea/southkorea-maps/master/kostat/2018/json/skorea-municipalities-2018-geo.json").then((geojson) => {
         // GeoJSON 데이터를 svg 요소에 추가합니다.
-        svg.selectAll("path")
+        g.selectAll("path")
             .data(geojson.features)
             .enter()
             .append("path")
             .attr("d", path)
-            .style("fill", (geo => {
-              if (this.seoulCodeList.includes(geo.properties.code)) {
-                return 'rgb(255, 0, 0)';
-              } else {
-                return 'rgb(206, 212, 218)';
-              }
-            }) )
+            .style("fill", 'rgb(206, 212, 218)')
             .style("stroke", "white")
             .style("stroke-width", "0.5px")
             .on("click", function() {
@@ -69,6 +72,14 @@ export default {
               }
             });
       });
+
+      // 테두리를 그리기 위한 rect 요소 추가
+      svg.append("rect")
+          .attr("width", width)
+          .attr("height", height)
+          .style("fill", "none")
+          .style("stroke", "black")
+          .style("stroke-width", "1px");
     },
   },
 };

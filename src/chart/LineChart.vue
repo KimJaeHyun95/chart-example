@@ -1,18 +1,31 @@
 <template>
   <div>
     <div className="chart-container">
-      <canvas ref="lineChart" style="max-width: 800px; max-height: 350px"></canvas>
+      <canvas ref="lineChart" v-bind:width="chartWidth" v-bind:height="chartHeight"></canvas>
     </div>
   </div>
 </template>
-
 <script>
-import { Chart, LineController, LinearScale, CategoryScale, PointElement, LineElement } from 'chart.js';
+import {Chart, LineController, LinearScale, CategoryScale, PointElement, LineElement} from 'chart.js';
 
 Chart.register(LineController, LinearScale, CategoryScale, PointElement, LineElement);
 
 export default {
   name: 'LineChart',
+  props: {
+    chartWidth: {
+      type: Number,
+      default: 800
+    },
+    chartHeight: {
+      type: Number,
+      default: 350
+    },
+    data: {
+      type: Object,
+      require: true
+    },
+  },
   data() {
     return {
       chart: null,
@@ -26,17 +39,7 @@ export default {
       const ctx = this.$refs.lineChart;
       this.chart = new Chart(ctx, {
         type: 'line',
-        data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-          datasets: [
-            {
-              label: 'Example Data',
-              data: [12, 19, 3, 5, 2, 3],
-              borderColor: 'rgba(75, 192, 192, 1)',
-              tension: 0.1,
-            },
-          ],
-        },
+        data: this.data,
         options: {
           scales: {
             y: {
@@ -49,8 +52,7 @@ export default {
   },
 };
 </script>
-
-<style>
+<style scoped>
 .chart-container {
   position: relative;
   max-width: 800px;

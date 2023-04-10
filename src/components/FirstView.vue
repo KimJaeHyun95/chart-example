@@ -54,6 +54,27 @@
         ],
       }">
     </bar-chart>
+    <bar-chart :chartWidth="400" :chartHeight="300"
+               :data="{
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'test'],
+        datasets: [
+          {
+            label: 'Example Data 1',
+            data: [12, 19, 3, 5, 2, 3, 6],
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
+          },
+          {
+            label: 'Example Data 2',
+            data: [5, 10, 8, 14, 9, 12, 34],
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1,
+          },
+        ],
+      }">
+    </bar-chart>
     <pie-chart :size="1"
         :data="{
           labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],

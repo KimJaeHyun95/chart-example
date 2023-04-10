@@ -1,5 +1,5 @@
 <template>
-  <div class="wordcloud-container">
+  <div class="wordcloud-container" style="display: flex; justify-content: flex-start;">
     <canvas ref="wordCloudCanvas" :width="canvasSize.width" :height="canvasSize.height"></canvas>
   </div>
 </template>
@@ -53,7 +53,4 @@ export default {
 };
 </script>
 <style scoped>
-.wordcloud-container {
-  position: relative;
-}
 </style>

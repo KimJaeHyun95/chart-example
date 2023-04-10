@@ -44,9 +44,9 @@ export default {
 
       const size = this.size || 1;
 
-      const iconSize = new L.Point(12.5 * size, 20.5 * size);
-      const iconAnchor = new L.Point(6.25 * size, 20.5 * size);
-      const popupAnchor = new L.Point(0, -33 * size);
+      const iconSize = new L.Point(25 * size**0.2, 41 * size**0.2);
+      const iconAnchor = new L.Point(12.5 * size**0.2, 41 * size**0.2);
+      const popupAnchor = new L.Point(0, -33 * size**0.2);
 
 
       // 마커 이미지 경로 설정 및 크기 조절

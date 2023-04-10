@@ -1,5 +1,5 @@
 <template>
-  <div ref="waffleChart"></div>
+  <div ref="waffleChart" style="display: flex; justify-content: flex-start;"></div>
 </template>
 <script>
 // d3 라이브러리를 import

@@ -1,5 +1,5 @@
 <template>
-  <div ref="networkChart"></div>
+  <div ref="networkChart" style="display: flex; justify-content: flex-start;"></div>
 </template>
 
 <script>

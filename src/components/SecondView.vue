@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>두 번째 페이지 입니다.</h1>
-    <word-Cloud :size="1"
+    <word-cloud :size="1"
     :wordList="[
         ['Hello', 50],
         ['World', 30],
@@ -10,7 +10,7 @@
         ['Vue.js', 10],
         ['WordCloud', 5]
       ]"
-    ></word-Cloud>
+    ></word-cloud>
     <waffle-chart :size="1" :rows="10" :columns="10"
       :data="[
         {category: 'A', value: 9},

@@ -45,6 +45,13 @@ export default {
           .scaleExtent([1, 8]) // 확대, 축소 범위 설정
           .on("zoom", (event) => {
             g.attr("transform", event.transform);
+          })
+          .filter(event => {
+            // 더블 클릭 이벤트를 필터링하여 확대 기능을 비활성화합니다.
+            if (event.type === "dblclick") {
+              return false;
+            }
+            return true;
           });
 
       svg.call(zoomHandler);

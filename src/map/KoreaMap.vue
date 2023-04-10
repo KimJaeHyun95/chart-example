@@ -1,5 +1,5 @@
 <template>
-  <div ref="koreaMap"></div>
+  <div ref="koreaMap" style="display: flex; justify-content: flex-start;"></div>
 </template>
 <script>
 import * as d3 from "d3";

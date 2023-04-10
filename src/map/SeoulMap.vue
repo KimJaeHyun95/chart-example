@@ -1,5 +1,5 @@
 <template>
-  <div ref="seoulMap"></div>
+  <div ref="seoulMap" style="display: flex; justify-content: flex-start;"></div>
 </template>
 
 <script>

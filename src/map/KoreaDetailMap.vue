@@ -1,5 +1,5 @@
 <template>
-  <div ref="koreaMap"></div>
+  <div ref="koreaMap" style="display: flex; justify-content: flex-start;"></div>
 </template>
 <script>
 import * as d3 from "d3";
@@ -14,7 +14,6 @@ export default {
   data() {
     return {
       seoulCodeList: [  "11010", "11020", "11030", "11040", "11050",  "11060", "11070", "11080", "11090", "11100",  "11110", "11120", "11130", "11140", "11150",  "11160", "11170", "11180", "11190", "11200",  "11210", "11220", "11230", "11240", "11250"]
-
     };
   },
   mounted() {
@@ -49,13 +48,9 @@ export default {
             .enter()
             .append("path")
             .attr("d", path)
-            .style("fill", (geo => {
-              if (this.seoulCodeList.includes(geo.properties.code)) {
-                return 'rgb(255, 0, 0)';
-              } else {
-                return 'rgb(206, 212, 218)';
-              }
-            }) )
+            .style("fill", (geo) => {
+              return this.seoulCodeList.includes(geo.properties.code) ? 'rgb(255, 0, 0)' : 'rgb(206, 212, 218)';
+            })
             .style("stroke", "white")
             .style("stroke-width", "0.5px")
             .on("click", function() {

@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h1>네 번째 페이지 입니다.</h1>
-      <korea-detail-map2></korea-detail-map2>
+    <h1>다섯 번째 페이지 입니다.</h1>
+    <video-player></video-player>
   </div>
 </template>
 
 <script>
-import KoreaDetailMap2 from "@/map/KoreaDetailMap2";
+import VideoPlayer from "@/player/VideoPlayer";
 
 export default {
   name: 'ThirdView',
@@ -17,7 +17,7 @@ export default {
   mounted() {
   },
   components: {
-    KoreaDetailMap2
+    VideoPlayer
   },
   methods: {
   },

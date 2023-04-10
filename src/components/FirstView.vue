@@ -17,6 +17,19 @@
             borderColor: 'rgba(255, 99, 132, 1)',
             tension: 0.1,
           },
+          {
+            label: 'Example Data 3',
+            data: [5, 20, 8, 20, 30, 40],
+            borderColor: 'rgba(55, 99, 132, 1)',
+            tension: 0.1,
+          },
+          {
+            label: 'Example Data 4',
+            data: [43, 10, 5, 14, 28, 49],
+            borderColor: 'rgba(55, 99, 232, 1)',
+            tension: 0.1,
+            hidden: true
+          }
         ],
       }">
     </line-chart>

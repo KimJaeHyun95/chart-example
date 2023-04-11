@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div className="chart-container">
+    <div class="chart-container">
       <canvas ref="barChart" v-bind:width="chartWidth" v-bind:height="chartHeight"></canvas>
     </div>
   </div>

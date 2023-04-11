@@ -5,6 +5,7 @@
     <a href="/2" class="mg-r-10">2</a>
     <a href="/3" class="mg-r-10">3</a>
     <a href="/4" class="mg-r-10">4</a>
+    <a href="/5" class="mg-r-10">5</a>
   </div>
 
   <router-view></router-view>
@@ -31,5 +32,9 @@ export default {
 
 .mg-r-10 {
   margin-right: 10px;
+}
+
+.mg-r-10:last-child {
+  margin-right: 0;
 }
 </style>

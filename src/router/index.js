@@ -5,6 +5,7 @@ import FirstView from '../components/FirstView'
 import SecondView from '../components/SecondView'
 import ThirdView from '../components/ThirdView'
 import FourthView from '../components/FourthView'
+import FifthView from '../components/FifthView'
 
 // 라우터 설계
 const routes = [
@@ -12,6 +13,7 @@ const routes = [
   { path: '/2', component:SecondView},
   { path: '/3', component:ThirdView},
   { path: '/4', component:FourthView},
+  { path: '/5', component:FifthView},
 ]
 
 // 라우터 생성

@@ -42,7 +42,8 @@ export default {
 
       // 확대, 축소, 드래그 기능 추가
       const zoomHandler = zoom()
-          .scaleExtent([1, 8]) // 확대, 축소 범위 설정
+          .scaleExtent([0.1, 8]) // 확대, 축소 범위 설정
+          .translateExtent([[-width, -height], [width * 2, height * 2]]) // 이동 가능한 범위 설정
           .on("zoom", (event) => {
             g.attr("transform", event.transform);
           })

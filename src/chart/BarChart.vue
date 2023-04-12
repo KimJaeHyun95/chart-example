@@ -26,6 +26,10 @@ export default {
       type: Object,
       require: true
     },
+    displayLegend: {
+      type: Boolean,
+      default: true
+    }
   },
   data() {
     return {
@@ -47,6 +51,11 @@ export default {
               beginAtZero: true,
             },
           },
+          plugins: {
+            legend: {
+              display: this.displayLegend
+            }
+          }
         },
       });
     },

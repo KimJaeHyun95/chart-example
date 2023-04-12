@@ -19,7 +19,7 @@
           },
           {
             label: 'Example Data 3',
-            data: [5, 20, 8, 20, 30, 40],
+            data: [5, 20, 16, 20, 30, 40],
             borderColor: 'rgba(55, 99, 132, 1)',
             tension: 0.1,
           },
@@ -33,28 +33,41 @@
         ],
       }">
     </line-chart>
-    <bar-chart :chartWidth="400" :chartHeight="300"
-      :data="{
+    <line-chart :chartWidth="1000" :chartHeight="400" :displayLegend="false"
+                :data="{
         labels: ['January', 'February', 'March', 'April', 'May', 'June'],
         datasets: [
           {
             label: 'Example Data 1',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            data: [12, 13, 7, 5, 2, 3],
             borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1,
+            tension: 0.1,
           },
           {
             label: 'Example Data 2',
-            data: [5, 10, 8, 14, 9, 12],
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            data: [12, 23, 35, 32, 38, 45],
             borderColor: 'rgba(255, 99, 132, 1)',
-            borderWidth: 1,
+            tension: 0.1,
           },
+          {
+            label: 'Example Data 3',
+            data: [5, 20, 8, 20, 30, 40],
+            borderColor: 'rgba(55, 99, 132, 1)',
+            tension: 0.1,
+          },
+          {
+            label: 'Example Data 4',
+            data: [43, 34, 23, 14, 28, 26],
+            borderColor: 'rgba(55, 99, 232, 1)',
+            tension: 0.1,
+          }
         ],
       }">
-    </bar-chart>
+    </line-chart>
     <bar-chart :chartWidth="400" :chartHeight="300"
+      :data="data1">
+    </bar-chart>
+    <bar-chart :chartWidth="400" :chartHeight="300" :displayLegend="false"
                :data="{
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'test'],
         datasets: [
@@ -75,7 +88,7 @@
         ],
       }">
     </bar-chart>
-    <pie-chart :size="1"
+    <pie-chart :size="1" :displayLegend="true"
         :data="{
           labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
           datasets: [
@@ -100,6 +113,8 @@
           ],
         }"
     ></pie-chart>
+
+    <a href="javascript: void(0)" @click="test()">TEST</a>
   </div>
 </template>
 
@@ -112,6 +127,25 @@ export default {
   name: 'FirstView',
   data() {
     return {
+      data1: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+        datasets: [
+          {
+            label: 'Example Data 1',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
+          },
+          {
+            label: 'Example Data 2',
+            data: [5, 10, 8, 14, 9, 12],
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1,
+          },
+        ],
+      }
     };
   },
   mounted() {
@@ -122,6 +156,9 @@ export default {
     PieChart
   },
   methods: {
+    test() {
+      console.log(1)
+    }
   },
 };
 </script>

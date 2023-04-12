@@ -22,6 +22,10 @@ export default {
       type: Object,
       require: true
     },
+    displayLegend: {
+      type: Boolean,
+      default: true
+    }
   },
   data() {
     return {
@@ -37,6 +41,13 @@ export default {
       this.chart = new Chart(ctx, {
         type: 'pie',
         data: this.data,
+        options: {
+          plugins: {
+            legend: {
+              display: this.displayLegend
+            }
+          }
+        },
       });
     },
   },

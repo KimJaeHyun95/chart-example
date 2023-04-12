@@ -56,34 +56,30 @@ export default {
       const canvas = this.$refs.wordCloudCanvas;
       const wordList = this.wordList;
 
+      let totalWeight = 0
+      wordList.forEach((item) => {
+        totalWeight += item[1]
+      })
+
+      wordList.forEach((item) => {
+        item[1] *= 100/totalWeight
+      })
+
+      console.log(wordList)
+
       // 워드 클라우드 인스턴스 생성
       const wordCloudInstance = WordCloud(canvas, {
         list: wordList, // 워드 클라우드에 표시할 단어와 가중치를 포함하는 배열
-        gridSize: 2 * this.size, // 단어들 사이의 그리드 크기 (간격) 조절
-        weightFactor: 2 * this.size, // 단어의 크기에 곱해지는 가중치 계수 조절
+        gridSize: 0.1 * this.size, // 단어들 사이의 그리드 크기 (간격) 조절
+        weightFactor: 1 * this.size, // 단어의 크기에 곱해지는 가중치 계수 조절
         fontFamily: 'Arial, sans-serif', // 워드 클라우드에서 사용할 글꼴 설정
         color: () => this.getRandomColor(), // 단어 색상을 결정하는 함수
-        backgroundColor: '#FFFFFF', // 워드 클라우드의 배경색 설정
+        backgroundColor: '#FFF', // 워드 클라우드의 배경색 설정
         rotateRatio: 0.5, // 단어 회전 비율 설정 (0 ~ 1 사이의 값)
         rotationSteps: 2, // 회전 단계 수 (회전 각도의 개수)
+        minSize: 0,
         drawOutOfBound: false, // 영역 밖에도 단어 그리기 허용 여부 설정
-
         shuffle: true, // 단어 배열을 섞을지 여부 설정
-        // eslint-disable-next-line no-unused-vars
-        hover: function(item, dimension, event) {
-          // item이 정의되지 않은 경우 처리 추가
-          if (!item) {
-            canvas.style.cursor = "default";
-            return;
-          }
-
-          // 마우스 오버 이벤트 처리 함수
-          if (item) {
-            canvas.style.cursor = "pointer";
-          } else {
-            canvas.style.cursor = "default";
-          }
-        },
         click: function(item) { // 클릭 이벤트 처리 함수
           console.log(item);
         }

@@ -3,12 +3,12 @@
     <h1>두 번째 페이지 입니다.</h1>
     <word-cloud :size="1"
     :wordList="[
-        ['Hello', 50],
-        ['World', 30],
-        ['Example', 20],
-        ['Data', 15],
-        ['Vue.js', 10],
-        ['WordCloud', 5]
+        ['1번 Word', 35],
+        ['2번 Word', 25],
+        ['3번 Word', 15],
+        ['4번 Word', 12],
+        ['5번 Word', 7],
+        ['6번 Word', 5]
       ]"
     ></word-cloud>
     <waffle-chart :size="1" :rows="10" :columns="10"
@@ -37,7 +37,7 @@
         {category: 'E', value: 7},
         {category: 'F', value: 13}
       ]"></waffle-chart-horizontality>
-    <network-chart :size="1" circleSize="1" circleDistance="1"
+    <network-chart :size="1" :circleSize="1" :circleDistance="1"
       :nodes="[
         { id: '코로나', depth: 0 },
         { id: '의료', depth: 1 },

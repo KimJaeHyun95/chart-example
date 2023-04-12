@@ -70,8 +70,8 @@ export default {
       // 워드 클라우드 인스턴스 생성
       const wordCloudInstance = WordCloud(canvas, {
         list: wordList, // 워드 클라우드에 표시할 단어와 가중치를 포함하는 배열
-        gridSize: 0.1 * this.size, // 단어들 사이의 그리드 크기 (간격) 조절
-        weightFactor: 1 * this.size, // 단어의 크기에 곱해지는 가중치 계수 조절
+        gridSize: 0, // 단어들 사이의 그리드 크기 (간격) 조절
+        weightFactor: this.size, // 단어의 크기에 곱해지는 가중치 계수 조절
         fontFamily: 'Arial, sans-serif', // 워드 클라우드에서 사용할 글꼴 설정
         color: () => this.getRandomColor(), // 단어 색상을 결정하는 함수
         backgroundColor: '#FFF', // 워드 클라우드의 배경색 설정

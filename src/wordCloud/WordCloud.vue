@@ -31,7 +31,9 @@ export default {
     }
   },
   data() {
-    return {wordCloudInstance: null};
+    return {
+      wordCloudInstance: null
+    };
   },
   mounted() {
     this.createWordCloud();
@@ -39,8 +41,11 @@ export default {
   methods: {
     createWordCloud() {
       const canvas = this.$refs.wordCloudCanvas;
-      WordCloud(canvas, {
-        list: this.wordList,
+      const wordList = this.wordList;
+
+      // 워드 클라우드 인스턴스 생성
+      const wordCloudInstance = WordCloud(canvas, {
+        list: wordList,
         gridSize: 3 * this.size,
         weightFactor: 4 * this.size,
         fontFamily: 'Roboto, sans-serif',
@@ -49,8 +54,22 @@ export default {
         rotateRatio: 0.5,
         rotationSteps: 2,
         shuffle: true,
-
+        // Add hover event handler
+        // eslint-disable-next-line no-unused-vars
+        hover: function(item, dimension, event) {
+          if (item) {
+            canvas.style.cursor = 'pointer';
+          } else {
+            canvas.style.cursor = 'default';
+          }
+        },
+        click: function(item) {
+          console.log(item);
+        }
       });
+
+      // wordCloudInstance를 data 객체에 저장
+      this.wordCloudInstance = wordCloudInstance;
     },
   }
 };

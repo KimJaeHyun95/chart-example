@@ -53,8 +53,11 @@ export default {
   methods: {
 
     createWordCloud() {
+
       const canvas = this.$refs.wordCloudCanvas;
       const wordList = this.wordList;
+
+      wordList.sort((a, b) => b[1] - a[1]); // 가중치를 기준으로 내림차순 정렬
 
       let totalWeight = 0
       wordList.forEach((item) => {
@@ -75,11 +78,11 @@ export default {
         fontFamily: 'Arial, sans-serif', // 워드 클라우드에서 사용할 글꼴 설정
         color: () => this.getRandomColor(), // 단어 색상을 결정하는 함수
         backgroundColor: '#FFF', // 워드 클라우드의 배경색 설정
-        rotateRatio: 0.5, // 단어 회전 비율 설정 (0 ~ 1 사이의 값)
+        rotateRatio: 0.3, // 단어 회전 비율 설정 (0 ~ 1 사이의 값)
         rotationSteps: 2, // 회전 단계 수 (회전 각도의 개수)
-        minSize: 0,
+        minSize: 1,
         drawOutOfBound: false, // 영역 밖에도 단어 그리기 허용 여부 설정
-        shuffle: true, // 단어 배열을 섞을지 여부 설정
+        shuffle: false, // 단어 배열을 섞을지 여부 설정
         click: function(item) { // 클릭 이벤트 처리 함수
           console.log(item);
         }

@@ -3,12 +3,12 @@
     <h1>두 번째 페이지 입니다.</h1>
     <word-cloud :size="4"
     :wordList="[
-        ['1번 Word', 35],
-        ['2번 Word', 25],
-        ['3번 Word', 150],
-        ['4번 Word', 12],
-        ['5번 Word', 7],
-        ['6번 Word', 5]
+        ['Word1', 35],
+        ['Word2', 25],
+        ['Word3', 150],
+        ['Word4', 12],
+        ['Word5', 7],
+        ['Word6', 5]
       ]"
     ></word-cloud>
     <waffle-chart :size="1" :rows="10" :columns="10"

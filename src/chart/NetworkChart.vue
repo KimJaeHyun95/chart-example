@@ -49,8 +49,24 @@ export default {
       const width = 400 * this.size;
       const height = 300 * this.size;
 
+      // 색상 배열을 만듭니다.
+      const colors = [
+        'rgba(255, 159, 64, 1)',
+        'rgba(46, 204, 113, 1)',
+        'rgba(52, 152, 219, 1)',
+        'rgba(231, 76, 60, 1)',
+        'rgba(142, 68, 173, 1)',
+        'rgba(26, 188, 156, 1)',
+        'rgba(241, 196, 15, 1)',
+        'rgba(230, 126, 34, 1)',
+        'rgba(155, 89, 182, 1)',
+        'rgba(52, 73, 94, 1)',
+      ];
+
       // 색상 스케일
-      const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+      const colorScale = d3.scaleOrdinal()
+          .domain(this.nodes.map(d => d.category))
+          .range(colors);
 
       // Force simulation 설정
       const simulation = d3
@@ -91,7 +107,11 @@ export default {
           .enter() // 데이터를 기반으로 요소를 생성하도록 설정합니다.
           .append("circle") // 원 요소를 추가합니다.
           .attr("r", (d) => (d.depth === 0 ? 30 : 20 - d.depth * 5) * this.circleSize) // 원의 반지름을 노드의 depth에 따라 설정합니다.
-          .attr("fill", (d) => colorScale(d.depth)); // 원의 색상을 노드의 depth에 따라 설정합니다.
+          .attr("fill", (d) => colorScale(d.depth)) // 원의 색상을 노드의 depth에 따라 설정합니다.
+          .style('cursor', 'pointer')
+          .on('click', (event, d) => {
+            console.log(d)
+          });
 
       // 노드 레이블 생성
       const label = svg
@@ -102,7 +122,11 @@ export default {
           .text((d) => d.id) // 텍스트 내용을 노드의 id로 설정합니다.
           .attr("font-size", 10 * this.circleSize +"px") // 텍스트의 글꼴 크기를 설정합니다.
           .attr("text-anchor", "middle") // 텍스트의 정렬 방향을 중앙으로 설정합니다.
-          .attr("dy",10 * this.circleSize / 2); // 텍스트의 y축 상의 위치를 조절합니다.
+          .attr("dy",10 * this.circleSize / 2) // 텍스트의 y축 상의 위치를 조절합니다.
+          .style('cursor', 'pointer')
+          .on('click', (event, d) => {
+            console.log(d)
+          });
 
       // 시뮬레이션 tick 이벤트 리스너
       simulation.on("tick", () => {

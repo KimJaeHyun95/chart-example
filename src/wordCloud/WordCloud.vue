@@ -12,7 +12,10 @@ export default {
   // - size: Number (optional) - 워드 클라우드의 크기를 조절하는 배율입니다. 기본값은 1입니다.
   // - wordList: Array (optional) - 워드 클라우드에 표시할 단어와 가중치를 포함하는 배열입니다. 각 단어는 ['단어', 가중치] 형식이어야 합니다.
   props: {
-    size: Number,
+    size: {
+      type: Number,
+      default: 1
+    },
     wordList: {
       type: Array,
       require: true
@@ -36,19 +39,19 @@ export default {
   methods: {
     createWordCloud() {
       const canvas = this.$refs.wordCloudCanvas;
-      const size = this.size || 1;
       WordCloud(canvas, {
         list: this.wordList,
-        gridSize: 3 * size,
-        weightFactor: 4 * size,
+        gridSize: 3 * this.size,
+        weightFactor: 4 * this.size,
         fontFamily: 'Roboto, sans-serif',
         color: 'random-dark',
         backgroundColor: '#FFFFFF',
         rotateRatio: 0.5,
         rotationSteps: 2,
-        shuffle: true
+        shuffle: true,
+
       });
-    }
+    },
   }
 };
 </script>

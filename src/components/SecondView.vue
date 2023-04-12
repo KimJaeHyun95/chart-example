@@ -18,7 +18,15 @@
         {category: 'C', value: 13},
         {category: 'D', value: 3},
         {category: 'E', value: 7},
-        {category: 'F', value: 13}
+        {category: 'F', value: 5},
+        {category: 'G', value: 8},
+        {category: 'A1', value: 9},
+        {category: 'B1', value: 5},
+        {category: 'C1', value: 13},
+        {category: 'D1', value: 3},
+        {category: 'E1', value: 7},
+        {category: 'F1', value: 5},
+        {category: 'G1', value: 8}
       ]"></waffle-chart>
     <waffle-chart-horizontality :size="1" :rows="10" :columns="10"
       :data="[

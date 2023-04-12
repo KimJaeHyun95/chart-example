@@ -28,8 +28,7 @@ export default {
   mounted() {
     this.createWaffleChart();
   },
-  methods: {
-    createWaffleChart() {
+  methods: {createWaffleChart() {
       const size = this.size;
       const rows = this.rows;
       const columns = this.columns;
@@ -43,8 +42,26 @@ export default {
       };
       const width = 400 * size * columns / 10 - margin.left - margin.right;
       const height = 400 * size * rows / 10 - margin.top - margin.bottom;
+
+      // 색상 배열을 만듭니다.
+      const colors = [
+        'rgba(255, 159, 64, 0.3)',
+        'rgba(46, 204, 113, 0.3)',
+        'rgba(52, 152, 219, 0.3)',
+        'rgba(231, 76, 60, 0.3)',
+        'rgba(142, 68, 173, 0.3)',
+        'rgba(26, 188, 156, 0.3)',
+        'rgba(241, 196, 15, 0.3)',
+        'rgba(230, 126, 34, 0.3)',
+        'rgba(155, 89, 182, 0.3)',
+        'rgba(52, 73, 94, 0.3)',
+      ];
+
       // 색상 스케일
-      const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+      const colorScale = d3.scaleOrdinal()
+          .domain(this.data.map(d => d.category))
+          .range(colors);
+
       // svg 요소 생성
       const svg = d3
           .select(this.$refs.waffleChart)
@@ -57,6 +74,7 @@ export default {
           }, ${
               margin.top
           })`);
+
       // 총 합산값과 스케일 팩터 계산
       const totalValue = this.data.reduce((sum, d) => sum + d.value, 0);
       const scaleFactor = 100 / totalValue;
@@ -77,10 +95,25 @@ export default {
             .attr('y', (d, j) => Math.floor((squareIndex + j) / columns) * (height / rows))
             .attr('fill', colorScale(d.category))
             .attr('stroke', '#FFFFFF')
-            .attr('stroke-width', 1);
+            .attr('stroke-width', 1)
+            .style('cursor', 'pointer')
+            .on('mouseover', function() { // 마우스 오버 이벤트 등록
+              d3.select(this)
+                  .attr('opacity', 0.7)
+                  .append('title')
+                  .text(d.category); // 항목 이름을 title 속성에 설정
+            })
+            .on('mouseout', function() { // 마우스 아웃 이벤트 등록
+              d3.select(this)
+                  .attr('opacity', 1)
+                  .select('title')
+                  .remove(); // title 요소 제거
+            });
+
         // 다음 인덱스 지정
         squareIndex += adjustedValue;
       });
+
     }
   }
 };

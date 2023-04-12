@@ -51,6 +51,14 @@ export default {
             },
           },
           plugins: {
+            // 마우스 오버시 나오는 설명
+            tooltip: {
+              enabled: true,
+              mode: 'nearest',
+              backgroundColor: 'rgba(75, 192, 192, 0.7)',
+              titleColor: 'rgba(255, 255, 255, 1)',
+              bodyColor: 'rgba(255, 255, 255, 1)'
+            },
             legend: {
               display: this.displayLegend
             }
